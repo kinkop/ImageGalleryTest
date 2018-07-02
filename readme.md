@@ -19,4 +19,4 @@
 
 #Installing Asset
 1. npm install
-2. npm run watch/hot
+2. npm run watch | npm run hot
