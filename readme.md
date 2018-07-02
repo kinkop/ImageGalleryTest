@@ -20,3 +20,6 @@
 #Installing Asset
 1. npm install
 2. npm run watch | npm run hot
+
+#Running
+http://image-gallery.test:8080
