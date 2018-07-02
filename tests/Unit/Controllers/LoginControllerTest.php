@@ -3,7 +3,6 @@
 namespace Tests\Unit\Contrllers;
 
 use ImageGallery\Helpers\HttpStatus;
-use ImageGallery\Repositories\Login\LoginRepositoryInterface;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Contracts\Console\Kernel;
@@ -36,11 +35,6 @@ class LoginControllerTest extends TestCase
         $this->app[Kernel::class]->setArtisan(null);
     }
 
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
     public function testLoginValidationNotPassed()
     {
         $response = $this->call('POST',

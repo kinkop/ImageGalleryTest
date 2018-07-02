@@ -18,7 +18,6 @@ use Validator;
 
 class AuthController extends ApiController
 {
-    protected $transformer = 'login';
     protected $loginRepo;
 
     function __construct(LoginRepositoryInterface $loginRepo)
@@ -62,10 +61,15 @@ class AuthController extends ApiController
 
         return $this->response(
             $user,
-            Transformer::getTransformer($this->transformer),
+            Transformer::getTransformer('login'),
             'Login successful!');
     }
 
+    /**
+     * Logout
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function logout()
     {
         $this->loginRepo->logout();

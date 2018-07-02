@@ -23,36 +23,23 @@ Route::group([
         'uses' => 'AuthController@login'
     ]);
 
-    //API authenticate group
+    //Create user
+    Route::post('/user', [
+        'as' => 'user.store',
+        'uses' => 'UserController@store'
+    ]);
+
+    //API authentication group
     Route::group([
         'middleware' => ['auth:api']
     ], function () {
+        //Logout
         Route::post('/logout', [
             'as' => 'logout',
             'uses' => 'AuthController@logout'
         ]);
+
+        //Image upload resource
+        Route::resource('/image-upload', 'ImageUploadController');
     });
 });
-
-//Login
-//Route::post('login', [
-//
-//]);
-//
-//Route::group([
-//    'as' => 'api.',
-//], function () {
-//    Route::get('test', function () {
-//        $user = \ImageGellery\User::find(1);
-//        $token = $user->createToken($user->email);
-//
-//        return response()->json([
-//            'access_token' => $token->accessToken,
-//            'token_id' => $token->token->id
-//        ]);
-//    });
-//});
-//
-//Route::get('/test2', function () {
-//    return 'ok';
-//})->middleware('auth:api');

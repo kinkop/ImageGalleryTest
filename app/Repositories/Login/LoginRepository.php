@@ -75,5 +75,10 @@ class LoginRepository extends BaseRepository implements LoginRepositoryInterface
     {
         // TODO: Implement all() method.
     }
+
+    public function delete($id)
+    {
+        // TODO: Implement delete() method.
+    }
     // @codeCoverageIgnoreEnd
 }

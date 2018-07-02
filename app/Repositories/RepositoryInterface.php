@@ -19,4 +19,5 @@ interface RepositoryInterface
     public function findOrFail($id);
     public function where($conditions = []);
     public function all();
+    public function delete($id);
 }
