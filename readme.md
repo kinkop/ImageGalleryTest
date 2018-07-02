@@ -15,6 +15,7 @@
 3. composer install
 4. php artisan passport:install
 5. php artisan migrate
+6. php db:seed
 
 #Installing Asset
 1. npm install
