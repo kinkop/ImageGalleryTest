@@ -7,7 +7,7 @@ const login = ({state, commit}, payload) => {
     api.login(payload.email, payload.password)
       .then((response) => {
         const user = _.get(response, 'data.data')
-        commit(types.SET_USER, )
+        commit(types.SET_USER, user)
 
         resolve(response)
       })

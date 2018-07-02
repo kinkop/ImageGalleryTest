@@ -59355,7 +59355,7 @@ var login = function login(_ref, payload) {
   return new Promise(function (resolve, reject) {
     __WEBPACK_IMPORTED_MODULE_0__api__["a" /* login */](payload.email, payload.password).then(function (response) {
       var user = _.get(response, 'data.data');
-      commit(__WEBPACK_IMPORTED_MODULE_1__mutation_types__["a" /* SET_USER */]);
+      commit(__WEBPACK_IMPORTED_MODULE_1__mutation_types__["a" /* SET_USER */], user);
 
       resolve(response);
     }).catch(function (err) {
