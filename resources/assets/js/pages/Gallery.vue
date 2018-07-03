@@ -82,7 +82,7 @@
       },
       onUploadProgress(file, progress, bytesSent) {
         const preview = $(file.previewElement)
-        $('.custom-progress', preview).text(progress + '%')
+        $('.custom-progress', preview).text(Math.ceil(progress) + '%')
       },
       onFileError(file, message) {
         const preview = $(file.previewElement)

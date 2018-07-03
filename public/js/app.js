@@ -55063,7 +55063,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
     onUploadProgress: function onUploadProgress(file, progress, bytesSent) {
       var preview = $(file.previewElement);
-      $('.custom-progress', preview).text(progress + '%');
+      $('.custom-progress', preview).text(Math.ceil(progress) + '%');
     },
     onFileError: function onFileError(file, message) {
       var preview = $(file.previewElement);
