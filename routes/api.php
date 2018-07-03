@@ -41,5 +41,9 @@ Route::group([
 
         //Image upload resource
         Route::resource('/image-upload', 'ImageUploadController');
+        Route::post('/image-upload/multiple', [
+            'as' => 'image-upload.store.multiple',
+            'uses' => 'ImageUploadController@storeMultiple'
+        ]);
     });
 });

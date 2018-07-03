@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use ImageGallery\Helpers\HttpStatus;
 use ImageGallery\Helpers\Transformer;
 use ImageGallery\Http\Controllers\Controller;
+use ImageGallery\Http\Requests\ImageUploadStoreMultipleRequest;
 use ImageGallery\Http\Requests\ImageUploadStoreRequest;
 use ImageGallery\Repositories\ImageUpload\ImageUploadRepositoryInterface;
 use ImageGallery\Repositories\Login\LoginRepositoryInterface;
@@ -112,6 +113,52 @@ class ImageUploadController extends ApiController
 
         return $this->response(
             $imageUpload,
+            Transformer::getTransformer('image_upload'),
+            '',
+            [],
+            [
+                'test' => 1
+            ]);
+    }
+
+    public function storeMultiple(Request $request)
+    {
+        //Validate
+        $validator = Validator::make($request->all(), ImageUploadStoreMultipleRequest::$_rules);
+        if ($validator->fails()) {
+            return $this->responseError(
+                'Validation fails.',
+                $validator->errors(), HttpStatus::UNPROCESSABLE_ENTITY);
+        }
+
+        //Upload file
+        $user = $this->loginRepo->getUser();
+
+        $path = null;
+        $imageUpload = null;
+        $uploadImageService = new ImageUpload();
+        $imageUploads = [];
+        try {
+            foreach ($request->file('file') as $file) {
+                $path = $uploadImageService->upload($file, $user->id);
+                $attributes = [
+                    'user_id' => $user->id,
+                    'mime_type' => $file->getClientMimeType(),
+                    'size' => $file->getSize(),
+                    'filename' => $path
+                ];
+                $imageUpload = $this->imageUploadRepo->create($attributes);
+                $imageUploads[] = $imageUpload;
+            }
+        } catch (\Exception $e) {
+            return $this->responseError(
+                $e->getMessage(),
+                [],
+                $e->getCode());
+        }
+
+        return $this->response(
+            collect($imageUploads),
             Transformer::getTransformer('image_upload'),
             '',
             [],

@@ -46,7 +46,9 @@
           headers: {
             'Authorization': 'Bearer ' + this.$store.state.user.access_token
           },
-          chunking: true
+          chunking: true,
+          chunkSize: 10485760,
+          forceChunking: false
         },
         dropzoneFiles: {}
       }
