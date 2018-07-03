@@ -37,7 +37,7 @@
           url: '/api/image-upload',
           thumbnailWidth: 300,
           thumbnailHeight: 300,
-          maxFilesize: 2,
+          maxFilesize: 10,
           acceptedFiles: 'image/jpeg,image/png',
           resizeMethod: 'crop',
           dictDefaultMessage: '<i class="fa fa-cloud-upload fa-4x"></i><br/>Drop files here or click to choose files...',
