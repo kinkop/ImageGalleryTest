@@ -21,6 +21,22 @@ Vue.use(VeeValidate);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+
+// Add a request interceptor
+window.axios.interceptors.request.use(function (config) {
+  // Do something before request is sent
+  const accessToken = _.get(store, 'state.user.access_token', null)
+  if (accessToken) {
+    config.headers['Authorization'] = 'Bearer ' + _.get(store, 'state.user.access_token');
+  }
+
+  return config;
+}, function (error) {
+  // Do something with request error
+  return Promise.reject(error);
+});
+
+
 const app = new Vue({
   el: '#app',
   template: '<App />',

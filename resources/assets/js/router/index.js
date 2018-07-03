@@ -1,8 +1,9 @@
 import Vue from 'vue'
+import store from '../store'
 import VueRouter from 'vue-router'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
-import store from '../store'
+import Gallery from '../pages/Gallery'
 
 Vue.use(VueRouter)
 
@@ -25,22 +26,34 @@ const router = new VueRouter({
       meta: {
         title: 'Login',
         auth: false
-      }
+      },
     },
+    {
+      path: '/gallery',
+      component: Gallery,
+      name: 'gallery',
+      meta: {
+        title: 'Gallery',
+        auth: true
+      }
+    }
   ]
 })
 
 router.beforeEach((to, from, next) => {
-  if (store.state.user) {
-    next()
-  } else {
-    if (_.get(to, 'meta.auth') === true) {
+  let title = _.get(to, 'meta.title', 'Simple Image Gallery')
+  document.title = title
+
+  if (_.get(to, 'meta.auth') === true) {
+    if (!store.state.user) {
       next({name: 'login'})
     } else {
       next()
     }
 
+    return
   }
+  next()
 
 })
 

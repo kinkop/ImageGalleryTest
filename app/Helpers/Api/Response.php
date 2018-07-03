@@ -15,7 +15,7 @@ use League\Fractal\Resource;
 
 trait Response
 {
-    public function response($data, $transformer = null, $message = '', $headers = [])
+    public function response($data, $transformer = null, $message = '', $headers = [], $meta = [])
     {
         $resource = null;
         if ($transformer) {
@@ -31,12 +31,13 @@ trait Response
             $data = $manager->createData($resource)->toArray();
         } else {
             $data = [
-                'data' => $data
+                'data' => $data,
             ];
         }
 
         $data = array_merge($data, [
-            'message' => $message
+            'message' => $message,
+            'meta' => $meta
         ]);
 
         return $this->outputResponse($data, $headers);

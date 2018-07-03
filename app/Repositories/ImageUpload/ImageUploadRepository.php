@@ -65,20 +65,19 @@ class ImageUploadRepository extends BaseRepository implements ImageUploadReposit
 
     public function delete($id)
     {
-        $imageUpload = ImageUpload::find($id);
-
-        if (!$imageUpload) {
-            return false;
-        }
-
-        $imageUpload->delete();
-
-        return true;
+        // TODO: Implement all() method.
     }
 
     public function getByUser($userId)
     {
         return ImageUpload::where('user_id', $userId)
             ->get();
+    }
+
+    public function deleteBelongUser($userId, $id)
+    {
+        return ImageUpload::where('user_id', $userId)
+            ->where('id', $id)
+            ->delete();
     }
 }

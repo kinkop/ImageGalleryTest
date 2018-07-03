@@ -17,7 +17,12 @@ class ImageUploadTransformer extends TransformerAbstract
     public function transform(ImageUpload $imageUpload)
     {
         return [
-            'id' => $imageUpload->id
+            'id' => $imageUpload->id,
+            'user_id' => $imageUpload->id,
+            'mime_type' => $imageUpload->mime_type,
+            'size' => $imageUpload->size,
+            'filename' => $imageUpload->filename,
+            'file_url' => \Storage::disk('image_upload')->url($imageUpload->filename)
         ];
     }
 

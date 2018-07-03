@@ -2,13 +2,13 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import actions from './actions'
 import mutations from './mutations'
-import { getStoreAuthentication } from '../auth'
+import { getAuthentication } from '../auth'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    user: null
+    user: getAuthentication()
   },
   actions,
   mutations

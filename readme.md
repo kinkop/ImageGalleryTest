@@ -16,6 +16,7 @@
 4. php artisan passport:install
 5. php artisan migrate
 6. php db:seed
+7. php artisan storage:link
 
 #Installing Asset
 1. npm install

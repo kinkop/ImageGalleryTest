@@ -15,5 +15,6 @@ interface ImageUploadRepositoryInterface extends RepositoryInterface
 {
 
     public function getByUser($userId);
+    public function deleteBelongUser($userId, $id);
 
 }
