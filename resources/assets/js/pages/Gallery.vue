@@ -25,6 +25,7 @@
   import { mapActions} from 'vuex'
   import lightbox2 from 'lightbox2'
   import 'lightbox2/dist/css/lightbox.min.css'
+  import swal from 'sweetalert'
 
   export default {
      name: 'gallery',
@@ -127,9 +128,22 @@
       triggerRemoveFile(){
         $('.remove-file').unbind('click')
         $('.remove-file').bind('click', (e) => {
-          let id = $(e.target).closest('.remove-file').data('id')
-          this.$refs.myVueDropzone.removeFile(this.dropzoneFiles[id])
-          this.deleteImageUpload(id)
+          swal({
+            title: "Are you sure to delete?",
+            text: "",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+            .then((willDelete) => {
+              if (willDelete) {
+                let id = $(e.target).closest('.remove-file').data('id')
+                this.$refs.myVueDropzone.removeFile(this.dropzoneFiles[id])
+                this.deleteImageUpload(id)
+              }
+            });
+
+
         })
       }
     },
